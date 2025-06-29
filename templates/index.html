@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Salary Predictor</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            font-family: 'Segoe UI', sans-serif;
+            color: #fff;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 60px auto;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.4), 0 0 40px rgba(0, 200, 255, 0.2);
+            animation: slideUp 1.5s ease;
+        }
+
+        h2 {
+            text-align: center;
+            color: #00e0ff;
+            text-shadow: 0 0 5px #00e0ff, 0 0 10px #00e0ff;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+            color: #cfd8dc;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 6px;
+            border: none;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-size: 1em;
+            transition: background 0.3s;
+        }
+
+        input:focus, select:focus {
+            background-color: rgba(255, 255, 255, 0.2);
+            outline: none;
+        }
+
+        button {
+            margin-top: 25px;
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(to right, #00f2fe, #4facfe);
+            border: none;
+            color: white;
+            font-size: 1.1em;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 0 10px #00f2fe, 0 0 20px #4facfe;
+            transition: transform 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+
+        .result {
+            margin-top: 30px;
+            padding: 15px;
+            text-align: center;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 10px #00f2fe, 0 0 15px #4facfe;
+            animation: fadeIn 2s ease-in;
+        }
+
+        .result h3 {
+            margin: 10px 0;
+            color: #00ffe7;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>💼 Salary Prediction Form</h2>
+        <form action="/predict" method="post">
+            <label>Age:</label>
+            <input type="number" name="age" required>
+
+            <label>Gender:</label>
+            <select name="gender">
+                <option>Male</option>
+                <option>Female</option>
+            </select>
+
+            <label>Education Level:</label>
+            <select name="education">
+                <option>Bachelor's</option>
+                <option>Master's</option>
+                <option>PhD</option>
+                <option>Diploma</option>
+                <option>Associate's Degree</option>
+            </select>
+
+            <label>Job Title:</label>
+            <select name="job">
+                <option>Software Engineer</option>
+                <option>Data Analyst</option>
+                <option>Senior Manager</option>
+                <option>Marketing Manager</option>
+                <option>Project Manager</option>
+                <option>HR Manager</option>
+                <option>Financial Analyst</option>
+                <option>Sales Executive</option>
+                <option>UX Designer</option>
+                <option>Data Scientist</option>
+            </select>
+
+            <label>Experience (Years):</label>
+            <input type="number" name="experience" required>
+
+            <button type="submit">🚀 Predict Salary</button>
+        </form>
+
+        {% if prediction %}
+        <div class="result">
+            <h3>💰 Predicted Salary: ₹{{ prediction }}</h3>
+            <h3>📈 Model Accuracy (R² Score): {{ hu }}</h3>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
